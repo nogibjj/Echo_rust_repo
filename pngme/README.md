@@ -46,8 +46,54 @@ pub struct Png {
 }
 ```
 # Example
-pngme encode <file_path> <chunk_type> <message> <out_file_path>
-pngme decode <file_path> <chunk_type>
-pngme remove <file_path> <chunk_type>
-pngme print <file_path>
 
+## Commands
+
+### Encode a secret into a file
+
+```bash
+pngme encode <FILE_PATH> <CHUNK_TYPE> <MESSAGE>
+```
+
+Example:
+
+```bash
+pngme encode ./myfile.png sEcr "Hello, this is a PNG file secret"
+```
+
+### Decode a secret from a file
+
+```bash
+pngme decode <FILE_PATH> <CHUNK_TYPE>
+```
+
+Example:
+
+```bash
+pngme decode ./myfile.png sEcr
+```
+
+### Remove a secret from a file
+
+```bash
+pngme remove <FILE_PATH> <CHUNK_TYPE>
+```
+
+Example:
+
+```bash
+pngme remove ./myfile.png sEcr
+```
+
+### Print chunks
+
+```bash
+pngme print <FILE_PATH>
+```
+
+Example:
+
+```bash
+pngme print ./myfile.png
+```
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/23135940/1657510398726-6567250f-0007-4daf-9004-fe2b223927ca.png#clientId=u6933692d-b9d1-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=343&id=u1914f7aa&margin=%5Bobject%20Object%5D&name=image.png&originHeight=686&originWidth=1748&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1036080&status=done&style=none&taskId=u2fff4be3-2efe-4dc2-bb0c-8a9798573e0&title=&width=874)
