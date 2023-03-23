@@ -41,7 +41,7 @@ The actix_web macro is used to define the entry point to the Actix web server, w
 
 ## Running Locally
 To test my app locally before deploying, use: `cargo shuttle run`
-
+![Screen Shot 2023-03-22 at 11 37 55 PM](https://user-images.githubusercontent.com/90811429/227098619-399e499a-7ea1-44cf-8e82-b4d4e7cf5193.png)
 
 
 
@@ -60,6 +60,10 @@ To test my app locally before deploying, use: `cargo shuttle run`
 5. Run this code in terminal: 
 
 `curl https://movie.shuttleapp.rs/movie?movie_type=Action`
+![Screen Shot 2023-03-22 at 11 28 44 PM](https://user-images.githubusercontent.com/90811429/227098661-6a5dba65-d44b-4e28-b372-4f50812297c2.png)
+![Screen Shot 2023-03-22 at 11 28 50 PM](https://user-images.githubusercontent.com/90811429/227098649-644f837b-c633-48e2-be50-b0d6cc666238.png)
+## Test
+![Screen Shot 2023-03-22 at 11 39 45 PM](https://user-images.githubusercontent.com/90811429/227098783-f1bdf6c0-c0f2-4b01-9f03-22a3ed04d527.png)
 
 ### **Reference**
 1. https://docs.rs/shuttle-service/latest/shuttle_service/
