@@ -2,6 +2,93 @@ This is individual project 4:
 
 # Serverless Data Engineering Pipeline
 
+Step 0: Analyzing the Dataset
+
+Wikiticker JSON Dataset
+
+First we should understand the incoming rows of data from our /usr/hdp/3.0.1.0-187/druid/quickstart/wikiticker-2015-09-12-sampled.json.gz dataset.
+
+{
+    "time":"2015-09-12T00:47:05.474Z",
+    "channel":"#en.wikipedia",
+    "cityName":"Auburn",
+    "comment":"/* Status of peremptory norms under international law */ fixed spelling of 'Wimbledon'",
+    "countryIsoCode":"AU",
+    "countryName":"Australia",
+    "isAnonymous":true,
+    "isMinor":false,
+    "isNew":false,
+    "isRobot":false,
+    "isUnpatrolled":false,
+    "metroCode":null,
+    "namespace":"Main",
+    "page":"Peremptory norm",
+    "regionIsoCode":"NSW",
+    "regionName":"New South Wales",
+    "user":"60.225.66.142",
+    "delta":0,
+    "added":0,
+    "deleted":0
+}
+Every row in our dataset will have the same keys as above with different values. Let's separate our timestamp (unique-identifier attribute), dimensions (String-typed attributes) and metrics (numeric-typed attributes) into their own groups:
+
+timestamp
+
+"time"
+Timestamp can be found in the time field. If your dataset doesn't have a time field, you can tag all rows with either a fixed timestamp "2000-01-01T00:00:00.000Z" or you can insert the current time using your favorite programming language.
+
+dimensions
+
+  "channel",
+  "cityName",
+  "comment",
+  "countryIsoCode",
+  "countryName",
+  "isAnonymous",
+  "isMinor",
+  "isNew",
+  "isRobot",
+  "isUnpatrolled",
+  "metroCode",
+  "namespace",
+  "page",
+  "regionIsoCode",
+  "regionName",
+  "user"
+The above keys all have String-typed values
+
+metrics
+
+{
+  "name" : "count",
+  "type" : "count"
+},
+{
+  "name" : "added",
+  "type" : "longSum",
+  "fieldName" : "added"
+},
+{
+  "name" : "deleted",
+  "type" : "longSum",
+  "fieldName" : "deleted"
+},
+{
+  "name" : "delta",
+  "type" : "longSum",
+  "fieldName" : "delta"
+},
+{
+  "name" : "user_unique",
+  "type" : "hyperUnique",
+  "fieldName" : "user"
+}
+Some useful metrics to aggregate in regards to our dataset will be the total number of rows in the dataset, so the count. Another useful metric will be to aggregate or collect all the the added keys, then compute their sum using Druid's longSum Aggregator API. We can find the sum for the deleted keys, then for the delta keys. Another metric that we can collect is the user key since each row has their own unique user field. At index time, the unique user keys will be aggregated to hyperUnique metric set.
+
+Now that we analyzed our dataset and separated into timestamp, dimensions and metrics groups, this information can help us in writing the Druid Ingestion Spec.
+
+
+
 Step 1: Define the Data Pipeline
 
 The first step is to define the data pipeline. For this example, let's consider a scenario where we need to extract data from social media, perform some natural language processing on the text data, and store the processed data in a database. The pipeline consists of the following steps:
