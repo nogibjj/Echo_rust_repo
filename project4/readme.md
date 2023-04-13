@@ -7,7 +7,7 @@ Step 0: Analyzing the Dataset
 Wikiticker JSON Dataset
 
 First we should understand the incoming rows of data from our /usr/hdp/3.0.1.0-187/druid/quickstart/wikiticker-2015-09-12-sampled.json.gz dataset.
-
+```
 {
     "time":"2015-09-12T00:47:05.474Z",
     "channel":"#en.wikipedia",
@@ -30,6 +30,7 @@ First we should understand the incoming rows of data from our /usr/hdp/3.0.1.0-1
     "added":0,
     "deleted":0
 }
+```
 Every row in our dataset will have the same keys as above with different values. Let's separate our timestamp (unique-identifier attribute), dimensions (String-typed attributes) and metrics (numeric-typed attributes) into their own groups:
 
 timestamp
@@ -38,7 +39,7 @@ timestamp
 Timestamp can be found in the time field. If your dataset doesn't have a time field, you can tag all rows with either a fixed timestamp "2000-01-01T00:00:00.000Z" or you can insert the current time using your favorite programming language.
 
 dimensions
-
+```
   "channel",
   "cityName",
   "comment",
@@ -55,10 +56,11 @@ dimensions
   "regionIsoCode",
   "regionName",
   "user"
+ ```
 The above keys all have String-typed values
 
 metrics
-
+```
 {
   "name" : "count",
   "type" : "count"
@@ -83,6 +85,7 @@ metrics
   "type" : "hyperUnique",
   "fieldName" : "user"
 }
+```
 Some useful metrics to aggregate in regards to our dataset will be the total number of rows in the dataset, so the count. Another useful metric will be to aggregate or collect all the the added keys, then compute their sum using Druid's longSum Aggregator API. We can find the sum for the deleted keys, then for the delta keys. Another metric that we can collect is the user key since each row has their own unique user field. At index time, the unique user keys will be aggregated to hyperUnique metric set.
 
 Now that we analyzed our dataset and separated into timestamp, dimensions and metrics groups, this information can help us in writing the Druid Ingestion Spec.
