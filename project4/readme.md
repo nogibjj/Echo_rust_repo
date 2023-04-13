@@ -1,6 +1,6 @@
 This is individual project 4:  
 
-#Serverless Data Engineering Pipeline
+# Serverless Data Engineering Pipeline
 
 Step 1: Define the Data Pipeline
 
